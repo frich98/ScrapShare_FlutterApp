@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="edu.oregonstate.richertf.testproj">
+    package="edu.oregonstate.richertf.testproj">    
    <application
         android:label="testproj"
         android:icon="@mipmap/ic_launcher">
