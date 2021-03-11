@@ -1,0 +1,15 @@
+Photo Sources
+
+bagels_1.jpg: https://depositphotos.com/stock-photos/bagels.html
+donuts_1.jpg: https://www.istockphoto.com/search/2/image?phrase=donut
+muffins_1.jpg: https://www.dreamstime.com/photos-images/burnt-muffins.html
+cookies_1.jpg: https://www.123rf.com/photo_3963203_christmas-cookies.html
+cake_1.jpg: https://www.istockphoto.com/search/2/image?phrase=slice+of+cake
+cake_2.jpg: ^^^
+cake_3.jpg: ^^^
+cake_4.jpg: ^^^
+cake_5.jpg: ^^^
+cake_6.jpg: ^^^
+cake_7.jpg: ^^^
+croissant_1.jpg: https://depositphotos.com/stock-photos/fresh-french-croissant.html
+croissant_2.jpg: https://www.123rf.com/photo_11295534_chocolate-croissant.html
