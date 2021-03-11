@@ -34,7 +34,6 @@ android {
     }
 
     defaultConfig {
-        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId "edu.oregonstate.richertf.scrapshare"
         minSdkVersion 23
         targetSdkVersion 30
