@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "531558051889",
+    "project_id": "testdb-8c5c1",
+    "storage_bucket": "testdb-8c5c1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:531558051889:android:2818150dd5ea34f5906510",
+        "android_client_info": {
+          "package_name": "edu.oregonstate.richertf.testproj"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "531558051889-lp9rv29u5tncjjqohmorrsqu9qsan4ig.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCkB9B3duBxm6HHaetBKtB1f34H-YkHrRs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "531558051889-lp9rv29u5tncjjqohmorrsqu9qsan4ig.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
