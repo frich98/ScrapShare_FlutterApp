@@ -19,6 +19,7 @@ dependencies:
   path_provider:
   path:
   test: ^1.5.1
+  intl: ^0.17.0
 
 dev_dependencies:
   flutter_test:
