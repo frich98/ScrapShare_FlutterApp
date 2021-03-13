@@ -1,21 +1,21 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-import '../components/home_appbar.dart';
-import '../components/home_floating_action_button.dart';
-import '../components/home_stream_builder.dart';
+import '../components/list_screen_appbar.dart';
+import '../components/list_screen_floating_action_button.dart';
+import '../components/list_screen_stream_builder.dart';
 
-class HomePage extends StatefulWidget{
+class ListScreen extends StatefulWidget{
 
   static const routeName = "/";
 
   final String appTitle = "ScrapShare";
 
   @override
-  HomePageState createState() => HomePageState();
+  ListScreenState createState() => ListScreenState();
 }
 
-class HomePageState extends State<HomePage>{
+class ListScreenState extends State<ListScreen>{
 
   FirebaseFirestore firestore;
   CollectionReference postsRef;
@@ -30,10 +30,10 @@ class HomePageState extends State<HomePage>{
   @override
   Widget build(BuildContext context){
     return Scaffold(
-      appBar: HomeAppBar.getAppBar(widget.appTitle),
+      appBar: ListScreenAppBar.getAppBar(widget.appTitle),
       floatingActionButtonLocation: FloatingActionButtonLocation.miniCenterFloat,
-      floatingActionButton: HomeFloatingActionButton(),
-      body: HomeStreamBuilder(postsRef: postsRef)
+      floatingActionButton: ListScreenFloatingActionButton(),
+      body: ListScreenStreamBuilder(postsRef: postsRef)
     );
   }
 

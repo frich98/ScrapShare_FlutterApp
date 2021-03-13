@@ -2,16 +2,16 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-class HomeStreamBuilder extends StatefulWidget{
+class ListScreenStreamBuilder extends StatefulWidget{
 
   final CollectionReference postsRef;
-  HomeStreamBuilder({this.postsRef});
+  ListScreenStreamBuilder({this.postsRef});
 
   @override
-  HomeStreamBuilderState createState() => HomeStreamBuilderState(); 
+  ListScreenStreamBuilderState createState() => ListScreenStreamBuilderState(); 
 }
 
-class HomeStreamBuilderState extends State<HomeStreamBuilder>{
+class ListScreenStreamBuilderState extends State<ListScreenStreamBuilder>{
 
   @override
   Widget build(BuildContext context){

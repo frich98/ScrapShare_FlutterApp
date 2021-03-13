@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import './screens/homepage_screen.dart';
+import 'screens/list_screen.dart';
 
 class App extends StatefulWidget{
 
@@ -13,7 +13,7 @@ class App extends StatefulWidget{
 class AppState extends State<App> {
 
   static final routes = {
-    HomePage.routeName: (context) => HomePage()
+    ListScreen.routeName: (context) => ListScreen()
   };
 
   @override
@@ -22,7 +22,7 @@ class AppState extends State<App> {
       title: widget.appTitle,
       theme: ThemeData.light(),
       routes: routes,
-      initialRoute: HomePage.routeName,
+      initialRoute: ListScreen.routeName,
     );
   }
 

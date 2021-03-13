@@ -1,7 +1,6 @@
-
 import 'package:flutter/material.dart';
 
-class HomeAppBar {
+class ListScreenAppBar {
   static getAppBar(String appTitle){
     return AppBar(
         title: Text(appTitle),
