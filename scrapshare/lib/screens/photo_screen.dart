@@ -54,7 +54,7 @@ class PhotoScreenState extends State<PhotoScreen>{
         backgroundColor: MaterialStateProperty.all(Colors.purple[100])
       ),
       child: _buttonText(context),
-      onPressed: () =>  _onTapAction(context)
+      onPressed: () =>  getImage()
     );
   }
 
@@ -68,11 +68,6 @@ class PhotoScreenState extends State<PhotoScreen>{
     );
   }
 
-  void _onTapAction(BuildContext context) async {
-    getImage();
-    _goToNewPostScreen(context, imageURL);
-  }
-
   void _goToNewPostScreen(BuildContext context, String imageURL) async {
     Navigator.push(
       context, 
@@ -81,7 +76,6 @@ class PhotoScreenState extends State<PhotoScreen>{
   }
 
   Future getImage() async { 
-
     final pickedFile = await picker.getImage(source: ImageSource.gallery);
     image = File(pickedFile.path);
     setState(() {});
@@ -92,8 +86,10 @@ class PhotoScreenState extends State<PhotoScreen>{
 
     uploadTask.then( (res) async {
       imageURL = await res.ref.getDownloadURL();
+      setState(() {});
+       _goToNewPostScreen(context, imageURL);
     });
-
-    setState(() {});
   }
+
+
 }
