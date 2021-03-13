@@ -23,7 +23,7 @@ class ListScreenFloatingActionButton extends StatelessWidget{
     return FloatingActionButton(
       onPressed: () => _goToPhotoScreen(context),
       child: Icon(Icons.add),
-      backgroundColor: Colors.purple[700],
+      backgroundColor: Colors.purple[600],
     );
   }
 
