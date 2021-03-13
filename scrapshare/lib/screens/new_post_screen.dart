@@ -184,11 +184,10 @@ class NewPostScreenState extends State<NewPostScreen>{
         imageURL: imageURL,
         quantity: quantity,
         latitude: locationData.latitude,
-        longitude: locationData.longitude,
-        postsRef: widget.postsRef      
+        longitude: locationData.longitude
       );
 
-      post.addPost();
+      addPost(post);
 
       Navigator.push(
         context, 
@@ -196,6 +195,19 @@ class NewPostScreenState extends State<NewPostScreen>{
       );
     }
   }
+
+  Future<void> addPost(Post post){
+    return widget.postsRef.add({
+      'date': post.date,
+      'imageURL': post.imageURL,
+      'quantity': post.quantity,
+      'latitude': post.latitude,
+      'longitude': post.longitude
+    })
+    .then( (value) => print("Post Added"))
+    .catchError( (error) => print("Failed to add post: $error"));
+  }
+
 
   void _goToListScreen(BuildContext context){
     Navigator.push(context, 
