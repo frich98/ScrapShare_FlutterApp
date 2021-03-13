@@ -1,10 +1,7 @@
 import "dart:io";
-
-//import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_storage/firebase_storage.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:path/path.dart' as Path;
 
 import '../components/general_appbar.dart';
 
@@ -13,6 +10,9 @@ import '../screens/new_post_screen.dart';
 class PhotoScreen extends StatefulWidget{
 
   static const routeName = "photoscreen";
+
+  final CollectionReference postsRef;
+  PhotoScreen({this.postsRef});
 
   @override
   PhotoScreenState createState() => PhotoScreenState();
@@ -27,7 +27,7 @@ class PhotoScreenState extends State<PhotoScreen>{
   @override
   Widget build(BuildContext context){
     return Scaffold(
-      appBar: GeneralAppBar.getAppBar(),
+      appBar: GeneralAppBar.getAppBar(true),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [_row(context)]
@@ -54,7 +54,7 @@ class PhotoScreenState extends State<PhotoScreen>{
         backgroundColor: MaterialStateProperty.all(Colors.purple[100])
       ),
       child: _buttonText(context),
-      onPressed: () =>  getImage()
+      onPressed: () =>  _goToNewPostScreen(context)
     );
   }
 
@@ -68,28 +68,20 @@ class PhotoScreenState extends State<PhotoScreen>{
     );
   }
 
-  void _goToNewPostScreen(BuildContext context, String imageURL) async {
+  void _goToNewPostScreen(BuildContext context) async {
+
+    final pickedFile = await picker.getImage(source: ImageSource.gallery);
+    File imageFile =  File(pickedFile.path);
+ 
     Navigator.push(
       context, 
-      MaterialPageRoute(builder: (context) => NewPostScreen(imageURL: imageURL))
+      MaterialPageRoute(builder: (context) => 
+        NewPostScreen(imageFile:  imageFile, postsRef: widget.postsRef)
+      )
     );
+    
   }
 
-  Future getImage() async { 
-    final pickedFile = await picker.getImage(source: ImageSource.gallery);
-    image = File(pickedFile.path);
-    setState(() {});
-
-    FirebaseStorage storage = FirebaseStorage.instance;
-    Reference ref = storage.ref().child(Path.basename(image.path));
-    UploadTask uploadTask = ref.putFile(image);
-
-    uploadTask.then( (res) async {
-      imageURL = await res.ref.getDownloadURL();
-      setState(() {});
-       _goToNewPostScreen(context, imageURL);
-    });
-  }
 
 
 }

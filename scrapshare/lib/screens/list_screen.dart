@@ -28,9 +28,9 @@ class ListScreenState extends State<ListScreen>{
   @override
   Widget build(BuildContext context){
     return Scaffold(
-      appBar: GeneralAppBar.getAppBar(),
+      appBar: GeneralAppBar.getAppBar(false),
       floatingActionButtonLocation: FloatingActionButtonLocation.miniCenterFloat,
-      floatingActionButton: ListScreenFloatingActionButton(),
+      floatingActionButton: ListScreenFloatingActionButton(postsRef: postsRef),
       body: ListScreenStreamBuilder(postsRef: postsRef)
     );
   }

@@ -1,8 +1,12 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import '../screens/photo_screen.dart';
 
 class ListScreenFloatingActionButton extends StatelessWidget{
+
+  final CollectionReference postsRef;
+  ListScreenFloatingActionButton({this.postsRef});
 
   @override
   Widget build(BuildContext context){
@@ -23,9 +27,9 @@ class ListScreenFloatingActionButton extends StatelessWidget{
     );
   }
 
-    void _goToPhotoScreen(BuildContext context){
+  void _goToPhotoScreen(BuildContext context){
     Navigator.push(context, 
-      MaterialPageRoute(builder: (context) => PhotoScreen())
+      MaterialPageRoute(builder: (context) => PhotoScreen(postsRef: postsRef,))
     );
   }
 
