@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../screens/photo_screen.dart';
 
 class ListScreenFloatingActionButton extends StatelessWidget{
 
@@ -16,9 +17,15 @@ class ListScreenFloatingActionButton extends StatelessWidget{
 
   Widget _floatingActionButton(BuildContext context){
     return FloatingActionButton(
-      onPressed: () {},
+      onPressed: () => _goToPhotoScreen(context),
       child: Icon(Icons.add),
       backgroundColor: Colors.purple[700],
+    );
+  }
+
+    void _goToPhotoScreen(BuildContext context){
+    Navigator.push(context, 
+      MaterialPageRoute(builder: (context) => PhotoScreen())
     );
   }
 

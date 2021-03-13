@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class ListScreenAppBar {
-  static getAppBar(String appTitle){
+class GeneralAppBar {
+  static getAppBar(){
     return AppBar(
-        title: Text(appTitle),
+        title: Text("ScrapShare"),
         centerTitle: true,
         backgroundColor: Colors.purple[300]
     );

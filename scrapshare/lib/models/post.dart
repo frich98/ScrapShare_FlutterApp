@@ -10,8 +10,9 @@ class Post {
 
   CollectionReference postsRef;
 
-  Post({this.date, this.imageURL, this.quantity, this.latitude, this.longitude, this.postsRef});
-
+  Post({this.date, this.imageURL, this.quantity, this.latitude, this.longitude,
+        this.postsRef});
+  
   Future<void> addPost(){
     return postsRef.add({
       'date': date,

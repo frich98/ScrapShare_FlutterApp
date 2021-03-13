@@ -1,15 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-import '../components/list_screen_appbar.dart';
+import '../components/general_appbar.dart';
 import '../components/list_screen_floating_action_button.dart';
 import '../components/list_screen_stream_builder.dart';
 
 class ListScreen extends StatefulWidget{
 
   static const routeName = "/";
-
-  final String appTitle = "ScrapShare";
 
   @override
   ListScreenState createState() => ListScreenState();
@@ -30,7 +28,7 @@ class ListScreenState extends State<ListScreen>{
   @override
   Widget build(BuildContext context){
     return Scaffold(
-      appBar: ListScreenAppBar.getAppBar(widget.appTitle),
+      appBar: GeneralAppBar.getAppBar(),
       floatingActionButtonLocation: FloatingActionButtonLocation.miniCenterFloat,
       floatingActionButton: ListScreenFloatingActionButton(),
       body: ListScreenStreamBuilder(postsRef: postsRef)
