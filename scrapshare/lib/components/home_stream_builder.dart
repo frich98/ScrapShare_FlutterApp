@@ -18,19 +18,29 @@ class HomeStreamBuilderState extends State<HomeStreamBuilder>{
     return StreamBuilder(
       stream: widget.postsRef.orderBy("date", descending: true).snapshots(),
       builder: (context, snapshot) {
-        if(snapshot.hasData && snapshot.data.documents != null && snapshot.data.documents.length > 0) {
-          return ListView.builder(
-            itemCount: snapshot.data.docs.length,
-            itemBuilder: (context, index) {
-              return _getTile(snapshot.data.docs[index]['date'].toDate(), 
-                              snapshot.data.docs[index]['quantity'].toString());
-            }  
-          );
+        if(_hasData(snapshot)){
+          return _listViewBuilder(snapshot);
         } else {
           return CircularProgressIndicator();
         }
       }
     );
+  }
+
+  Widget _listViewBuilder(AsyncSnapshot snapshot){
+    return ListView.builder(
+      itemCount: snapshot.data.docs.length,
+      itemBuilder: (context, index) {
+        return _getTile(
+          snapshot.data.docs[index]['date'].toDate(), 
+          snapshot.data.docs[index]['quantity'].toString()
+        );
+      }  
+    );
+  }
+  
+  bool _hasData(AsyncSnapshot snapshot){
+    return snapshot.hasData && snapshot.data.documents != null && snapshot.data.documents.length > 0;
   }
 
   Widget _getTile(DateTime date, String quantity){

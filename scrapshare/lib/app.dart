@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 import './screens/homepage_screen.dart';
 
@@ -13,25 +12,17 @@ class App extends StatefulWidget{
 
 class AppState extends State<App> {
 
-  FirebaseFirestore firestore;
-  CollectionReference postsRef;
-
-  @override
-  void initState() {
-    super.initState();
-    firestore = FirebaseFirestore.instance;
-    postsRef = firestore.collection('posts');
-  }
+  static final routes = {
+    HomePage.routeName: (context) => HomePage()
+  };
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: widget.appTitle,
       theme: ThemeData.light(),
-      home: HomePage(
-        appTitle: widget.appTitle, 
-        postsRef: postsRef
-      )
+      routes: routes,
+      initialRoute: HomePage.routeName,
     );
   }
 

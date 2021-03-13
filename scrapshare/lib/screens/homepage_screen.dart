@@ -7,9 +7,9 @@ import '../components/home_stream_builder.dart';
 
 class HomePage extends StatefulWidget{
 
-  final String appTitle;
-  final CollectionReference postsRef;
-  HomePage({this.appTitle, this.postsRef});
+  static const routeName = "/";
+
+  final String appTitle = "ScrapShare";
 
   @override
   HomePageState createState() => HomePageState();
@@ -17,13 +17,23 @@ class HomePage extends StatefulWidget{
 
 class HomePageState extends State<HomePage>{
 
+  FirebaseFirestore firestore;
+  CollectionReference postsRef;
+
+  @override
+  void initState() {
+    super.initState();
+    firestore = FirebaseFirestore.instance;
+    postsRef = firestore.collection('posts');
+  }
+
   @override
   Widget build(BuildContext context){
     return Scaffold(
       appBar: HomeAppBar.getAppBar(widget.appTitle),
       floatingActionButtonLocation: FloatingActionButtonLocation.miniCenterFloat,
       floatingActionButton: HomeFloatingActionButton(),
-      body: HomeStreamBuilder(postsRef: widget.postsRef)
+      body: HomeStreamBuilder(postsRef: postsRef)
     );
   }
 
