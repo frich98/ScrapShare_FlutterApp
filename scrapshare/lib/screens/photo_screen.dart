@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../components/general_appbars.dart';
+import '../components/widgets/general_appbars.dart';
 
 import '../screens/new_post_screen.dart';
 
@@ -78,6 +78,7 @@ class PhotoScreenState extends State<PhotoScreen>{
 
     final pickedFile = await picker.getImage(source: ImageSource.gallery);
     File imageFile =  File(pickedFile.path);
+    setState(() {});
  
     Navigator.push(
       context, 

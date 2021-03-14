@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-import '../screens/photo_screen.dart';
+import '../../screens/photo_screen.dart';
 
 class ListScreenFloatingActionButton extends StatelessWidget{
 

@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-import '../functions/format_date.dart';
-import '../models/post.dart';
-import '../screens/detail_screen.dart';
+import '../../functions/format_date.dart';
+import '../../models/post.dart';
+import '../../screens/detail_screen.dart';
 
 class ListScreenStreamBuilder extends StatefulWidget{
 

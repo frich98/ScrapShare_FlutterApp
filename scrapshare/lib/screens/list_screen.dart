@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-import '../components/general_appbars.dart';
-import '../components/list_screen_floating_action_button.dart';
-import '../components/list_screen_stream_builder.dart';
+import '../components/widgets/general_appbars.dart';
+import '../components/widgets/list_screen_floating_action_button.dart';
+import '../components/widgets/list_screen_stream_builder.dart';
 
 class ListScreen extends StatefulWidget{
 
