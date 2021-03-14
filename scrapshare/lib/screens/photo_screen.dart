@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../components/general_appbar.dart';
+import '../components/general_appbars.dart';
 
 import '../screens/new_post_screen.dart';
 
@@ -27,15 +27,15 @@ class PhotoScreenState extends State<PhotoScreen>{
   @override
   Widget build(BuildContext context){
     return Scaffold(
-      appBar: GeneralAppBar.getAppBar(true),
+      appBar: GeneralAppbars.getAppBarBasic(true),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: [_row(context)]
+        children: [_buttonRow(context)]
       )
     );
   }
 
-  Widget _row(BuildContext context){
+  Widget _buttonRow(BuildContext context){
     return Row(        
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -49,12 +49,18 @@ class PhotoScreenState extends State<PhotoScreen>{
   }
 
   Widget _button(BuildContext context){
-    return ElevatedButton(
-      style: ButtonStyle(
+    return Semantics(
+      label: 'Choose a photo from your photo gallery which will direct you to create a new post with it',
+      hint: 'Press to choose a photo from your gallery for your new post',
+      enabled: true,
+      button: true,
+      child: ElevatedButton(
+        style: ButtonStyle(
         backgroundColor: MaterialStateProperty.all(Colors.purple[100])
       ),
       child: _buttonText(context),
       onPressed: () =>  _goToNewPostScreen(context)
+    )
     );
   }
 
@@ -79,7 +85,6 @@ class PhotoScreenState extends State<PhotoScreen>{
         NewPostScreen(imageFile:  imageFile, postsRef: widget.postsRef)
       )
     );
-    
   }
 
 

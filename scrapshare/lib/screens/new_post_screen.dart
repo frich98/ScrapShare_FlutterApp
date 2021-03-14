@@ -7,6 +7,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:location/location.dart';
 import 'package:path/path.dart' as Path;
 
+import '../components/general_appbars.dart';
+
 import '../models/post.dart';
 import '../functions/validate_nonempty_text.dart';
 
@@ -42,7 +44,7 @@ class NewPostScreenState extends State<NewPostScreen>{
   void initState(){
     super.initState();
     quantityFocusNode = FocusNode();
-    _retrieveLocation();
+    _getLocation();
     _getImage();
   }
 
@@ -52,7 +54,7 @@ class NewPostScreenState extends State<NewPostScreen>{
     super.dispose();
   }
 
-  void _retrieveLocation() async {
+  void _getLocation() async {
     try {
       var _serviceEnabled = await locationService.serviceEnabled();
       if (!_serviceEnabled) {
@@ -83,84 +85,104 @@ class NewPostScreenState extends State<NewPostScreen>{
 
   @override
   Widget build(BuildContext context){
-
-    if(imageURL == null)
-    {
-      return Scaffold(
-      appBar: AppBar(
-        leading: Builder(
-          builder: (BuildContext context) {
-            return IconButton(
-              icon: const Icon(Icons.arrow_back),
-              onPressed: () => _goToListScreen(context),
-           );
-         }
-        ),
-        title: Text("ScrapShare"),
-        centerTitle: true,
-        backgroundColor: Colors.purple[300],
-      ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Center(child: Text("Loading image...", style: TextStyle(fontSize: 35, color: Colors.purple[600]))),
-          SizedBox(height: 100),
-          CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(Colors.purple[600]))    
-        ]
-      )
-      );
+    if(_isImageURLNull()){
+      return _scaffoldBodyIfImageNull(context);
+    } else {
+      return _scaffoldBodyIfImage(context);
     }
+  }
 
+  bool _isImageURLNull(){
+    return imageURL == null;
+  }
+
+  Widget _scaffoldBodyIfImageNull(BuildContext context){
     return Scaffold(
-      appBar: AppBar(
-        leading: Builder(
-          builder: (BuildContext context) {
-            return IconButton(
-              icon: const Icon(Icons.arrow_back),
-              onPressed: () => _goToListScreen(context),
-           );
-         }
-        ),
-        title: Text("ScrapShare"),
-        centerTitle: true,
-        backgroundColor: Colors.purple[300],
-      ),
-      body: Container( 
-        //alignment: Alignment.center,
-        padding: EdgeInsets.all(20),
-        child: ListView(        
-        children: [
-          Row(children: [SizedBox(height: 20)]),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                decoration: BoxDecoration(border: Border.all(color: Colors.purple[500])),
-                child: Image.network(imageURL, height: 250, width: 350)),
-            ]
-          ),              
-        SizedBox(height: 20),
-        Center(child: Text("Number of Items: ", style: TextStyle(fontSize: 25, fontStyle: FontStyle.italic, color: Colors.grey[600]))),
-        SizedBox(height: 20),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center, 
-          children:[ _quantityFormField(context)]
-        ),
-        SizedBox(height: 40),
-        Container(
-          width: 350, height: 50,
-          child: ElevatedButton(
-            style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.purple[500])),
-            onPressed: () => _saveOnPressed(),
-            child: Text("Upload Post!", 
-              style: TextStyle(fontSize: 30)
-            )
-          ) 
+        appBar: GeneralAppbars.getAppBarIfImageNull(_goToListScreen),
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Center(child: Text("Loading image...", style: TextStyle(fontSize: 35, color: Colors.purple[600]))),
+            SizedBox(height: 100),
+            CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(Colors.purple[600]))    
+          ]
         )
-      ])
-    )
+      );
+  }
+
+  Widget _scaffoldBodyIfImage(BuildContext context){
+    return Scaffold(
+        appBar: GeneralAppbars.getAppBarIfImage(_goToListScreen),
+        body: Container( 
+        padding: EdgeInsets.all(20),
+        child:_listView(context),
+      )
     );
   }
+
+  Widget _listView(BuildContext context){
+    return  ListView(
+      children: [
+        SizedBox(height: 20),
+        _imageRow(context),        
+        SizedBox(height: 20),
+        _numItemsText(context),
+        SizedBox(height: 20),
+        _quantityFormFieldRow(context),
+        SizedBox(height: 40),
+        _elevatedButton(context)
+      ]
+    );
+  }
+
+  Widget _imageRow(BuildContext context){
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Container(
+          decoration: BoxDecoration(border: Border.all(color: Colors.purple[500])),
+          child: Image.network(imageURL, height: 250, width: 350)),
+      ]
+    );
+  }
+
+  Widget _quantityFormFieldRow(BuildContext context){
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center, 
+      children: [
+         _quantityFormField(context)
+      ]
+    );
+  }
+
+  Widget _numItemsText(BuildContext context){
+    return Center(
+      child: Text("Number of Items: ",
+      style: TextStyle(
+        fontSize: 25,
+        fontStyle: FontStyle.italic,
+        color: Colors.grey[600])
+      )
+    );
+  }
+
+  Widget _elevatedButton(BuildContext context){
+    return Container(
+      width: 350, height: 50,
+      child: Semantics( 
+        label: 'Save New Post',
+        hint: 'Press to save your new post',
+        enabled: true,
+        button: true,            
+        child: ElevatedButton(
+          style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.purple[500])),
+          onPressed: () => _saveOnPressed(),
+          child: Text("Upload Post!", style: TextStyle(fontSize: 30)
+        )
+      ))
+    );
+  }
+
 
   void _getImage() async { 
 
@@ -220,7 +242,12 @@ class NewPostScreenState extends State<NewPostScreen>{
   }
 
  Widget _quantityFormField(BuildContext context){
-    return Container(
+    return Semantics(
+      label: 'Scrap quantity form field',
+      hint: 'Tap to enter the quantity of scrap items, the numerpad will appear when tapped',
+      enabled: true,
+      textField: true,      
+      child: Container(
       width: 200, height: 100,
       child: Form(
         key: formKey,
@@ -235,6 +262,7 @@ class NewPostScreenState extends State<NewPostScreen>{
           keyboardType: TextInputType.number
         )
       )
+    )
     );    
   }
 

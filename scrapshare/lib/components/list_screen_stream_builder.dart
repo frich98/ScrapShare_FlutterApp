@@ -60,7 +60,11 @@ class ListScreenStreamBuilderState extends State<ListScreenStreamBuilder>{
     DateTime date = post.date;
     String quantity = post.quantity.toString();
 
-    return ListTile(
+    return Semantics(
+      label: 'Post summary, displayed in a list of other posts',
+      hint: 'Tap to view the details of the post',
+      enabled: true,     
+      child: ListTile(
       onTap: () => _goToDetailScreen(context, post),
       title: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -68,6 +72,7 @@ class ListScreenStreamBuilderState extends State<ListScreenStreamBuilder>{
         Text(formatDate(date)),
         Text(quantity)
       ])
+    )
     );
 
   }
