@@ -23,10 +23,23 @@ class ListScreenStreamBuilderState extends State<ListScreenStreamBuilder>{
       builder: (context, snapshot) {
         if(_hasData(snapshot)){
           return _listViewBuilder(snapshot);
-        } else {
-          return CircularProgressIndicator();
         }
-      }
+          return _noDataDisplay(context);
+        }
+    );
+  }
+
+  Widget _noDataDisplay(BuildContext context){
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(child: CircularProgressIndicator())
+          ]
+        )
+      ]
     );
   }
 
