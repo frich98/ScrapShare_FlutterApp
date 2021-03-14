@@ -75,10 +75,11 @@ class NewPostScreenState extends State<NewPostScreen>{
         latitude: deviceLocation.locationData.latitude,
         longitude: deviceLocation.locationData.longitude
       );
-            
+      
       addPost(post);
 
       _goToListScreen(context);
+
     }
   }
 
